@@ -11,73 +11,76 @@ public class PlaySnakeLadderGame {
 
 
     public PlaySnakeLadderGame(GameBoardUtil gameBoardUtil) {
-       try {
-           this.gameBoardUtil = gameBoardUtil;
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
+        try {
+            this.gameBoardUtil = gameBoardUtil;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public int getPlayersLatestScore(String playerName) {
+    private int getPlayersLatestScore(String playerName) {
         return  gameBoardUtil.getPlayerScore(playerName);
     }
 
-    public boolean isPlayersCurrentScore99(int score) {
-        return  score==99;
+    private boolean isPlayersCurrentScoreLessThan100(int score) {
+        return  score<100;
     }
 
-    public Integer checkAndReturnIfPlayerFindsLadder(int startPosition) {
+    private Integer checkAndReturnIfPlayerFindsLadder(int startPosition) {
         if (gameBoardUtil.getLadderPositions().containsKey(startPosition)) {
-           return gameBoardUtil.getLadderPositions().get(startPosition);
+            return gameBoardUtil.getLadderPositions().get(startPosition);
         }
         return -1;
     }
 
-    public Integer checkAndReturnIfPlayerFindsSnake(int startPosition) {
+    private Integer checkAndReturnIfPlayerFindsSnake(int startPosition) {
         if (gameBoardUtil.getSnakePositions().containsKey(startPosition)) {
             return gameBoardUtil.getSnakePositions().get(startPosition);
         }
         return -1;
     }
 
-    public void playSnakeAndLadder(){
+    public void playSnakeAndLadder() {
         while (!hasAnyPlayerWon()) {
             for (int i = 0; i < gameBoardUtil.getNumberOfPlayers(); i++) {
                 int rolledDiceValue = gameBoardUtil.getDiceRollValue();
-                String string = "";
                 String currentPlayerName = gameBoardUtil.getPlayersName().get(i);
-                int previousPosition = gameBoardUtil.getPlayerScore(currentPlayerName);
-                int newPosition = previousPosition + rolledDiceValue;
-                if (checkAndReturnIfPlayerFindsSnake(newPosition) != null) {
-                    int snakeEndPosition = gameBoardUtil.getSnakePositions().get(newPosition);
-                    gameBoardUtil.setPlayerScores(currentPlayerName,snakeEndPosition);
-                    System.out.println(currentPlayerName + " rolled a dice value "
-                            + rolledDiceValue + " and encountered snake, so moved from " +
-                            previousPosition + " to " + snakeEndPosition);
+                int playersPreviousScore = getPlayersLatestScore(currentPlayerName);
+                System.out.println(playersPreviousScore);
+                int playersNewScore = playersPreviousScore + rolledDiceValue;
+                System.out.println(playersNewScore);
+                if (checkAndReturnIfPlayerFindsLadder(playersNewScore) != -1){
+                    int ladderEndPosition = checkAndReturnIfPlayerFindsLadder(playersNewScore);
+                    gameBoardUtil.setPlayerScores(currentPlayerName, ladderEndPosition);
+                    System.out.println(currentPlayerName + " rolled a dice value of " + rolledDiceValue + " and moved from " + playersPreviousScore+ " to "+ playersNewScore +
+                            " where he encountered a ladder and thus moved from " + playersNewScore + " to " +ladderEndPosition );
+                    if (ladderEndPosition == 100){
+                        System.out.println(currentPlayerName + " has won the match!");
+                        return;
+                    }
+                } else if (checkAndReturnIfPlayerFindsSnake(playersNewScore) != -1){
+                    int snakeEndPosition = checkAndReturnIfPlayerFindsSnake(playersNewScore);
+                    gameBoardUtil.setPlayerScores(currentPlayerName, snakeEndPosition);
+                    System.out.println(currentPlayerName + " rolled a dice value of " + rolledDiceValue + " and encountered a snake from the new position " + playersNewScore+
+                            " and thus moved from " + playersNewScore + " to " +snakeEndPosition );
+                    if (snakeEndPosition == 100){
+                        System.out.println(currentPlayerName + " has won the match!");
+                        return;
+                    }
+                }else {
+                    gameBoardUtil.setPlayerScores(currentPlayerName, playersNewScore);
+                    System.out.println(currentPlayerName + " rolled a dice value of " + rolledDiceValue + " and moved from " + playersPreviousScore + " to " + playersNewScore);
+                    if (playersNewScore == 100){
+                        System.out.println(currentPlayerName + " has won the match!");
+                        return;
+                    }
                 }
-                else if (checkAndReturnIfPlayerFindsLadder(newPosition) != null) {
-                    int ladderEndPosition = gameBoardUtil.getLadderPositions().get(newPosition);
-                    gameBoardUtil.setPlayerScores(currentPlayerName,ladderEndPosition);
-                    System.out.println(currentPlayerName + " rolled a dice value "
-                            + rolledDiceValue + " and encountered ladder, so moved from " +
-                            previousPosition + " to " + ladderEndPosition);
-                } else {
-                    gameBoardUtil.setPlayerScores(currentPlayerName,newPosition);
-                    System.out.println(currentPlayerName + " rolled a dice value "
-                            + rolledDiceValue + " and moved from " +
-                            previousPosition + " to " + newPosition);
-                }
-
             }
         }
     }
 
-    public boolean hasAnyPlayerWon() {
-       if (gameBoardUtil.getPlayerScores().containsValue(100)) {
-           return true;
-       }
-       return false;
+    private boolean hasAnyPlayerWon() {
+        return gameBoardUtil.getPlayerScores().containsValue(100);
     }
-
 
 }

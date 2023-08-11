@@ -1,5 +1,6 @@
 package SnakeAndLadderSolution.models;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Snakes {
@@ -8,6 +9,7 @@ public class Snakes {
 
     public Snakes(int numberOfSnake) {
         this.numberOfSnake = numberOfSnake;
+        snakePositionsMap = new HashMap<>();
     }
 
     public int getNumberOfSnake() {

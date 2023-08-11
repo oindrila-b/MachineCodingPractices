@@ -1,5 +1,7 @@
 package SnakeAndLadderSolution.models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +13,8 @@ public class Player {
 
     public Player(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+        playerNameAndScoreMap = new HashMap<>();
+        playerNames = new ArrayList<>();
     }
 
     public void initialisePlayersWithInitialScore(List<String> names) {
