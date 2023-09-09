@@ -1,6 +1,6 @@
-package SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.utils;
+package SnakeAndLadder.SnakeAndLadderSolution.utils;
 
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.exceptions.DiceValueExceededException;
+import SnakeAndLadder.SnakeAndLadderSolution.exceptions.DiceValueExceededException;
 
 import java.util.Random;
 

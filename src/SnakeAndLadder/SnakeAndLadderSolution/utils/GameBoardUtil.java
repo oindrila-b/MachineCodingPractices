@@ -1,10 +1,10 @@
-package SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.utils;
+package SnakeAndLadder.SnakeAndLadderSolution.utils;
 
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.exceptions.LadderPositionLimitationException;
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.exceptions.SnakePositionLimitationException;
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.models.Ladders;
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.models.Player;
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.models.Snakes;
+import SnakeAndLadder.SnakeAndLadderSolution.exceptions.LadderPositionLimitationException;
+import SnakeAndLadder.SnakeAndLadderSolution.exceptions.SnakePositionLimitationException;
+import SnakeAndLadder.SnakeAndLadderSolution.models.Ladders;
+import SnakeAndLadder.SnakeAndLadderSolution.models.Player;
+import SnakeAndLadder.SnakeAndLadderSolution.models.Snakes;
 
 import java.util.List;
 import java.util.Map;

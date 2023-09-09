@@ -1,6 +1,6 @@
-package SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.service;
+package SnakeAndLadder.SnakeAndLadderSolution.service;
 
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.utils.GameBoardUtil;
+import SnakeAndLadder.SnakeAndLadderSolution.utils.GameBoardUtil;
 
 import java.util.Map;
 

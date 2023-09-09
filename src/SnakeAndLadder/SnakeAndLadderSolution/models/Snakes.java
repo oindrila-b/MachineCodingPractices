@@ -1,4 +1,4 @@
-package SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.models;
+package SnakeAndLadder.SnakeAndLadderSolution.models;
 
 import java.util.HashMap;
 import java.util.Map;

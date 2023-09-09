@@ -1,7 +1,7 @@
-package SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.driver;
+package SnakeAndLadder.SnakeAndLadderSolution.driver;
 
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.service.PlaySnakeLadderGame;
-import SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.utils.GameBoardUtil;
+import SnakeAndLadder.SnakeAndLadderSolution.service.PlaySnakeLadderGame;
+import SnakeAndLadder.SnakeAndLadderSolution.utils.GameBoardUtil;
 
 import java.util.ArrayList;
 import java.util.List;

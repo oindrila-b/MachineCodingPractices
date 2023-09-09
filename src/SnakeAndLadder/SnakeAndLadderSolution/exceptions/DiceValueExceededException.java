@@ -1,4 +1,4 @@
-package SnakeAndLadder.SnakeAndLadderOptimised.SnakeAndLadderSolution.exceptions;
+package SnakeAndLadder.SnakeAndLadderSolution.exceptions;
 
 public class DiceValueExceededException extends Exception {
     public DiceValueExceededException() {
