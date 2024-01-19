@@ -1,53 +1,66 @@
 package Splitwise.SplitwiseOptimized.global;
 
-import Splitwise.SplitwiseOptimized.user.User;
+import Splitwise.SplitwiseOptimized.exceptions.NoExpenseListFound;
+import Splitwise.SplitwiseOptimized.model.OwedExpense;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GlobalExpenseTracker {
-    private Map<User, Map<User,Long>> userOwedAmountMap;
+
+    private Map<String, OwedExpense> expenseMap;
 
     public GlobalExpenseTracker() {
-        userOwedAmountMap = new HashMap<>();
+        expenseMap = new HashMap<>();
     }
 
-    public void addExpense(User spender, Long amount, User ower) {
-        if (userOwedAmountMap.containsKey(spender)) {
-            updateExpense(spender,amount,ower);
-        }else{
-            Map<User,Long> owerMap = new HashMap<>(Map.of(ower,amount));
-            userOwedAmountMap.put(spender, owerMap);
+    public void setExpenseMap(Map<String, OwedExpense> expenseMap) {
+        this.expenseMap = expenseMap;
+    }
+
+    public static GlobalExpenseTracker getInstance() {
+        return new GlobalExpenseTracker();
+    }
+
+    public  Map<String, Double> getExpenseMap(String userID) throws NoExpenseListFound{
+       try {
+           Map<String, Double>  owedExpenseMap = expenseMap.get(userID).getOwedExpenseMap();
+           if (owedExpenseMap == null || owedExpenseMap.isEmpty()) throw new NoExpenseListFound();
+           return owedExpenseMap;
+       }catch (Exception e) {
+            throw new NoExpenseListFound();
+       }
+    }
+
+    public void addUserExpense(String userId, OwedExpense owedExpense) throws NoExpenseListFound {
+        if (expenseMap.containsKey(userId)) {
+            updateUserExpense(userId,owedExpense);
+        } else {
+            expenseMap.put(userId, owedExpense);
         }
     }
 
-    private void updateExpense(User spender, Long amount, User ower)  {
-        Map<User,Long> currentExpenseMap = userOwedAmountMap.get(spender);
-        Long currentExpenseOfOwer = currentExpenseMap.get(ower);
-        Long updatedExpenseOfOwer = currentExpenseOfOwer + amount;
-        currentExpenseMap.put(ower,updatedExpenseOfOwer);
-        userOwedAmountMap.put(spender,currentExpenseMap);
-    }
-
-
-    // TODO
-    public void showBalance(List<User> users) {
-        for (User u: users) {
-            Map<User, Long> expenseMap = userOwedAmountMap.get(u);
-            for (var entry : expenseMap.entrySet()){
-                Map<User,Long> userLongMap = userOwedAmountMap.get(entry.getKey());
-                Long spenderOwed = userLongMap.getOrDefault(u,0L);
-                Long netExpense = entry.getValue() - spenderOwed;
-                if (netExpense <0){
-                    userLongMap.put(u, Math.abs(netExpense));
-                    userOwedAmountMap.put(entry.getKey(), userLongMap);
-                    System.out.println(entry.getKey().name() + " has settled scores with " + u.name());
-                }else {
-
-                }
+    private void updateUserExpense(String userID, OwedExpense expenses) throws NoExpenseListFound{
+        // First get the Expense object
+        OwedExpense currentExpense = expenseMap.get(userID);
+        // if expense object is null, throw exception
+        if (currentExpense == null) throw new NoExpenseListFound();
+        // otherwise get the expense mao
+        Map<String,Double> currentExpenseMap = currentExpense.getOwedExpenseMap();
+        // if expense map is null or empty, throw exception
+        if (currentExpenseMap == null || currentExpenseMap.isEmpty()) throw new NoExpenseListFound();
+        // else for each entry in the expense map
+        for (var entry : currentExpenseMap.entrySet()) {
+            // check if our passed expenses has the same key attribute as the current entry
+            if (expenses.getOwedExpenseMap().containsKey(entry.getKey())) {
+                // get the amount from the current expense map and add it to the value of the expense map provided
+                Double updatedAmount = expenses.getOwedExpenseMap().get(entry.getKey()) + entry.getValue();
+                // put the updated value in the current expense map
+                currentExpenseMap.put(entry.getKey(), updatedAmount);
             }
         }
+        currentExpense.setOwedExpenseMap(currentExpenseMap);
+        expenseMap.put(userID, currentExpense );
     }
 
 }
