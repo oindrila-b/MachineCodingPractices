@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class CalculateExact implements CalculateSplit {
     @Override
-    public void calculate(Long totalExpense, List<OwedExpense> userOwedExpenseList, User spender) {
+    public void calculate(Long totalExpense,Map<User, OwedExpense> owedExpenseMap, User spender) {
 
     }
 }
