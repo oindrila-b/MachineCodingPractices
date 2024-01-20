@@ -55,7 +55,7 @@ public class DefaultSlotManager implements SlotManager{
     }
 
     @Override
-    public Ticket parkVehicle(VehicleType vehicleType, List<Slot> slots, Vehicle vehicle, String floorID) throws TicketCreationException {
+    public Ticket parkVehicle(VehicleType vehicleType, List<Slot> slots, Vehicle vehicle, String floorID) throws TicketCreationException, MissingTicketPropertyException {
         AtomicBoolean isParked = new AtomicBoolean(false);
         AtomicReference<String> slotID = new AtomicReference<>("");
         slots.forEach(slot -> {
@@ -79,7 +79,7 @@ public class DefaultSlotManager implements SlotManager{
         });
 
        if (isParked.get() && slotID.get()!= null) {
-           return new Ticket(floorID, slotID.get(), vehicleType, vehicle.getLicenseNumber());
+           return createTicket(slotID.get(),floorID,vehicleType,vehicle.getLicenseNumber());
        }else{
          throw new TicketCreationException();
        }

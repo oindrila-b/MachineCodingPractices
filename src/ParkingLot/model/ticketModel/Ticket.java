@@ -14,8 +14,8 @@ public class Ticket {
     private VehicleType vehicleType;
     private String vehicleLicenseNumber;
 
-    public Ticket( String floorID,String slotID, VehicleType vehicleType, String carNumber) {
-        this.ticketID = slotID+floorID;
+    public Ticket( String ticketID,String floorID,String slotID, VehicleType vehicleType, String carNumber) {
+        this.ticketID = ticketID;
         this.slotID = slotID;
         this.vehicleType = vehicleType;
         this.floorID = floorID;

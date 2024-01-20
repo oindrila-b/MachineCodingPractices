@@ -2,6 +2,7 @@ package ParkingLot.floorManager;
 
 import ParkingLot.constants.VehicleType;
 import ParkingLot.exceptions.InvalidVehicleIDException;
+import ParkingLot.exceptions.MissingTicketPropertyException;
 import ParkingLot.exceptions.TicketCreationException;
 import ParkingLot.model.floor.Floor;
 import ParkingLot.model.slot.Slot;
@@ -49,7 +50,7 @@ public class DefaultFloorManagerClass implements FloorManager{
     }
 
     @Override
-    public Ticket parkVehicle(VehicleType vehicleType, Floor floor, Vehicle vehicle) throws TicketCreationException {
+    public Ticket parkVehicle(VehicleType vehicleType, Floor floor, Vehicle vehicle) throws TicketCreationException, MissingTicketPropertyException {
 
         for (int i = 1; i <= floors.size(); i++) {
             if (!isFloorBooked(floors.get(i))) {

@@ -2,6 +2,7 @@ package ParkingLot.floorManager;
 
 import ParkingLot.constants.VehicleType;
 import ParkingLot.exceptions.InvalidVehicleIDException;
+import ParkingLot.exceptions.MissingTicketPropertyException;
 import ParkingLot.exceptions.TicketCreationException;
 import ParkingLot.model.floor.Floor;
 import ParkingLot.model.slot.Slot;
@@ -16,7 +17,7 @@ public interface FloorManager {
 
     boolean isFloorBooked(Floor floor);
 
-    Ticket parkVehicle(VehicleType vehicleType,Floor floor, Vehicle vehicle) throws TicketCreationException;
+    Ticket parkVehicle(VehicleType vehicleType,Floor floor, Vehicle vehicle) throws TicketCreationException, MissingTicketPropertyException;
 
     boolean unParkVehicle(String vehicleID) throws InvalidVehicleIDException;
 
