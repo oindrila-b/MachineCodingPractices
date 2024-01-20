@@ -16,13 +16,11 @@ public class ParkingManager implements ParkingManagerInterface {
     private int slotEachFloor;
     private FloorManager floorManager;
     private List<Floor> floors;
-    AtomicBoolean isFloorBooked = new AtomicBoolean(true);
 
 
     public ParkingManager(int numberOfFloors, int slotEachFloor) {
         this.numberOfFloors = numberOfFloors;
         this.slotEachFloor = slotEachFloor;
-        isFloorBooked = new AtomicBoolean(true);
         floorManager = new DefaultFloorManagerClass();
     }
 
