@@ -6,6 +6,6 @@ import PubSubSystem.message.Message;
 
 public interface Publisher {
 
-    void publishMessage(Message message, PublisherSubscriberManager manager) ;
+    void publishMessage(Message message, PublisherSubscriberManager manager) throws NullMessageException;
 
 }
