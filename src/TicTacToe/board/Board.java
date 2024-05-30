@@ -48,6 +48,7 @@ public class Board implements BoardInterface{
                     reverseDiagonalCount == Math.abs(boardSize) ) {
                 this.winner = player;
             }
+            // some comment
             return getWinner();
     }
 
