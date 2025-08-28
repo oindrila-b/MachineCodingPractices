@@ -3,9 +3,9 @@ package practice_again.ParkingLot.models.vehicle;
 import practice_again.ParkingLot.constants.VEHICLE_TYPE;
 
 public class Vehicle {
-    public VEHICLE_TYPE vehicleType;
-    public String registrationNumber;
-    public String colour;
+    private VEHICLE_TYPE vehicleType;
+    private String registrationNumber;
+    private String colour;
 
     public VEHICLE_TYPE getVehicleType() {
         return vehicleType;
