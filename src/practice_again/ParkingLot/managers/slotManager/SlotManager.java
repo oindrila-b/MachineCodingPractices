@@ -3,6 +3,7 @@ package practice_again.ParkingLot.managers.slotManager;
 import practice_again.ParkingLot.constants.DefaultValues;
 import practice_again.ParkingLot.constants.VEHICLE_TYPE;
 import practice_again.ParkingLot.exceptions.AllSlotsBookedException;
+import practice_again.ParkingLot.exceptions.BikeSlotUnavailableException;
 import practice_again.ParkingLot.exceptions.TruckSlotUnavailableException;
 import practice_again.ParkingLot.models.slot.Slot;
 
@@ -30,6 +31,7 @@ public class SlotManager {
         return availableSlots;
     }
 
+    // TODO: make this atomic for concurrency // also parkingLot Manager manages the tickets and all
     public boolean bookSlotByVehicleType(VEHICLE_TYPE vehicleType) {
         if (vehicleType == VEHICLE_TYPE.TRUCK ) {
             if (bookedTruckSlots >=MAX_ALLOWED_TRUCK_SLOT) {
@@ -37,14 +39,20 @@ public class SlotManager {
                 throw new TruckSlotUnavailableException();
             } else {
                 // slot manager books a slot
-                Slot slot = new Slot(VEHICLE_TYPE.TRUCK, this.floorNumber, this.bookedSlots.size());
-
-                // ticket manager creates a ticket and this returns true.
-                // returns true
+                Slot slot = new Slot(VEHICLE_TYPE.TRUCK, this.floorNumber, (bookedTruckSlots+1));
+                this.bookedSlots.add(slot);
+                return true;
             }
         }
         if (vehicleType == VEHICLE_TYPE.BIKE) {
-
+                if (bookedBikeSlots >= MAX_ALLOWED_BIKE_SLOT) {
+                    throw new BikeSlotUnavailableException();
+                }else {
+                    //slot manager books a slot
+                Slot slot = new Slot(VEHICLE_TYPE.BIKE, this.floorNumber, (bookedBikeSlots+1));
+                 this.bookedSlots.add(slot);
+                  return true;
+                }
         }
         return false;
     }
