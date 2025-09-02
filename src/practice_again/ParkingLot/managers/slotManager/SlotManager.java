@@ -54,6 +54,13 @@ public class SlotManager {
                   return true;
                 }
         }
+        if (bookedSlots.size() < availableSlots) {
+            Slot slot = new Slot(VEHICLE_TYPE.CAR, this.floorNumber, bookedSlots.size() + 1);
+            this.bookedSlots.add(slot);
+            return true;
+        }else {
+            System.out.println("All slots booked");
+        }
         return false;
     }
 }
