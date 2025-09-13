@@ -29,5 +29,7 @@ public class ParkingSlotManager {
         this.ticketManager = ticketManager;
     }
 
-    public void bookSLot() {}
+    public void bookSLot() {
+        // book slot using slot manager
+    }
 }
