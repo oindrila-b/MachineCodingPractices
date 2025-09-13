@@ -28,4 +28,6 @@ public class ParkingSlotManager {
     public void setTicketManager(TicketManager ticketManager) {
         this.ticketManager = ticketManager;
     }
+
+    public void bookSLot() {}
 }
