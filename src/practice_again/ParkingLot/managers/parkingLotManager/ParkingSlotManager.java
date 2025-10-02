@@ -1,5 +1,6 @@
 package practice_again.ParkingLot.managers.parkingLotManager;
 
+import practice_again.ParkingLot.constants.VEHICLE_TYPE;
 import practice_again.ParkingLot.managers.slotManager.SlotManager;
 import practice_again.ParkingLot.managers.ticketManager.TicketManager;
 
@@ -29,7 +30,9 @@ public class ParkingSlotManager {
         this.ticketManager = ticketManager;
     }
 
-    public void bookSLot() {
+    public boolean bookSlot(VEHICLE_TYPE vehicleType) {
         // book slot using slot manager
+
+        return slotManager.bookSlotByVehicleType(vehicleType);
     }
 }
