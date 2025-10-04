@@ -32,7 +32,9 @@ public class ParkingSlotManager {
 
     public boolean bookSlot(VEHICLE_TYPE vehicleType) {
         // book slot using slot manager
+        if (slotManager.getAvailableSlots() != 0) {
+            return slotManager.bookSlotByVehicleType(vehicleType);
 
-        return slotManager.bookSlotByVehicleType(vehicleType);
+        }
     }
 }
