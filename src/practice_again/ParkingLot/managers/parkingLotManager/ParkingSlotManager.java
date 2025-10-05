@@ -36,5 +36,6 @@ public class ParkingSlotManager {
             return slotManager.bookSlotByVehicleType(vehicleType);
 
         }
+        return false;
     }
 }
